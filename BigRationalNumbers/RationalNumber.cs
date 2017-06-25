@@ -130,31 +130,12 @@ namespace EdlinSoftware.BigRationalNumbers
         /// <inheritdoc />
         public static bool operator <(RationalNumber rn1, RationalNumber rn2)
         {
-            if (rn1.Equals(rn2))
-            { return false; }
-            if (rn1.Numerator < 0 && rn2.Numerator >= 0)
-            { return true; }
-            if (rn1.Numerator >= 0 && rn2.Numerator < 0)
-            { return false; }
-
-            bool inverse = rn1.Numerator < 0 && rn2.Numerator < 0;
-
             var n1 = rn1.Numerator;
             var d1 = rn1.Denominator;
             var n2 = rn2.Numerator;
             var d2 = rn2.Denominator;
-            if (inverse)
-            {
-                checked
-                {
-                    n1 = -n1;
-                    n2 = -n2;
-                }
-            }
 
-            return inverse 
-                ? !ComparerOfMultiplications.IsLess((ulong)n1, (ulong)d2, (ulong)n2, (ulong)d1) 
-                : ComparerOfMultiplications.IsLess((ulong)n1, (ulong)d2, (ulong)n2, (ulong)d1);
+            return n1 * d2 < n2 * d1;
         }
 
         /// <inheritdoc />
@@ -188,36 +169,18 @@ namespace EdlinSoftware.BigRationalNumbers
         /// <inheritdoc />
         public static RationalNumber operator -(RationalNumber rn)
         {
-            checked
-            {
-                return new RationalNumber(-rn.Numerator, rn.Denominator);
-            }
+            return new RationalNumber(-rn.Numerator, rn.Denominator);
         }
 
         /// <inheritdoc />
         public static RationalNumber operator +(RationalNumber rn1, RationalNumber rn2)
         {
-            // (a*b + c*d)/(e*f) = (n1*d2 + n2*d1)/(d1*d2)
+            var n1 = rn1.Numerator;
+            var d1 = rn1.Denominator;
+            var n2 = rn2.Numerator;
+            var d2 = rn2.Denominator;
 
-            var a = rn1.Numerator;
-            var b = rn2.Denominator;
-            var c = rn2.Numerator;
-            var d = rn1.Denominator;
-            var e = rn1.Denominator;
-            var f = rn2.Denominator;
-
-            var gcd = GreatestCommonDenominator(e, f);
-            if (gcd != 1)
-            {
-                b /= gcd;
-                d /= gcd;
-                e /= gcd;
-            }
-
-            checked
-            {
-                return new RationalNumber(a * b + c * d, e * f);
-            }
+            return new RationalNumber(n1 * d2 + n2 * d1, d1 * d2);
         }
 
         /// <inheritdoc />
@@ -234,24 +197,7 @@ namespace EdlinSoftware.BigRationalNumbers
             var n2 = rn2.Numerator;
             var d2 = rn2.Denominator;
 
-            var gcd = GreatestCommonDenominator(n1, d2);
-            if (gcd != 1)
-            {
-                n1 /= gcd;
-                d2 /= gcd;
-            }
-
-            gcd = GreatestCommonDenominator(n2, d1);
-            if (gcd != 1)
-            {
-                n2 /= gcd;
-                d1 /= gcd;
-            }
-
-            checked
-            {
-                return new RationalNumber(n1 * n2, d1 * d2);
-            }
+            return new RationalNumber(n1 * n2, d1 * d2);
         }
 
         /// <inheritdoc />
@@ -265,24 +211,7 @@ namespace EdlinSoftware.BigRationalNumbers
             var n2 = rn2.Numerator;
             var d2 = rn2.Denominator;
 
-            var gcd = GreatestCommonDenominator(n1, n2);
-            if (gcd != 1)
-            {
-                n1 /= gcd;
-                n2 /= gcd;
-            }
-
-            gcd = GreatestCommonDenominator(d1, d2);
-            if (gcd != 1)
-            {
-                d1 /= gcd;
-                d2 /= gcd;
-            }
-
-            checked
-            {
-                return new RationalNumber(n1 * d2, d1 * n2);
-            }
+            return new RationalNumber(n1 * d2, d1 * n2);
         }
 
         /// <inheritdoc />

@@ -2493,9 +2493,9 @@
       "tags": [
         "Math"
       ],
-      "projectUrl": "https://github.com/yakimovim/rational-numbers",
-      "iconUrl": "https://raw.githubusercontent.com/yakimovim/rational-numbers/master/RationalNumbers/math.ico",
-      "licenseUrl": "https://github.com/yakimovim/rational-numbers/blob/master/LICENSE"
+      "projectUrl": "https://github.com/yakimovim/big-rational-numbers",
+      "iconUrl": "https://raw.githubusercontent.com/yakimovim/big-rational-numbers/master/BigRationalNumbers/math.ico",
+      "licenseUrl": "https://raw.githubusercontent.com/yakimovim/big-rational-numbers/master/LICENSE"
     },
     "restore": {
       "projectUniqueName": "E:\\Каталог Вани\\Код\\Git Repositories\\BigRationalNumbers\\BigRationalNumbers\\BigRationalNumbers.csproj",

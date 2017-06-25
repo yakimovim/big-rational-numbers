@@ -18,4 +18,6 @@ This library implements structure for presentation of rational numbers in .NET. 
 * implicit convertion from integer values (byte, int, long, ...)
 * explicit convertion to double, decimal and float
 
-RationalNumbers structure implements IEquatable and IComparable interfaces.
+Be aware, that conversion to decimal and float types can lead to OverflowException exception. Conversion to double type can result in infinity.
+
+RationalNumber structure implements IEquatable and IComparable interfaces.

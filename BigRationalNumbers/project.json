@@ -10,9 +10,9 @@
     "owners": [
       "Ivan Iakimov (edlinsoft@gmail.com)"
     ],
-    "projectUrl": "https://github.com/yakimovim/rational-numbers",
-    "licenseUrl": "https://github.com/yakimovim/rational-numbers/blob/master/LICENSE",
-    "iconUrl": "https://raw.githubusercontent.com/yakimovim/rational-numbers/master/RationalNumbers/math.ico",
+    "projectUrl": "https://github.com/yakimovim/big-rational-numbers",
+    "licenseUrl": "https://raw.githubusercontent.com/yakimovim/big-rational-numbers/master/LICENSE",
+    "iconUrl": "https://raw.githubusercontent.com/yakimovim/big-rational-numbers/master/BigRationalNumbers/math.ico",
     "tags": [
       "Math"
     ]
