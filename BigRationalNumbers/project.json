@@ -1,0 +1,27 @@
+﻿{
+  "name": "EdlinSoftware.BigRationalNumbers",
+  "version": "1.0.0",
+  "description": "EdlinSoftware Big Rational Numbers Library",
+  "copyright": "Copyright © 2017 EdlinSoftware",
+  "authors": [
+    "Ivan Iakimov (edlinsoft@gmail.com)"
+  ],
+  "packOptions": {
+    "owners": [
+      "Ivan Iakimov (edlinsoft@gmail.com)"
+    ],
+    "projectUrl": "https://github.com/yakimovim/rational-numbers",
+    "licenseUrl": "https://github.com/yakimovim/rational-numbers/blob/master/LICENSE",
+    "iconUrl": "https://raw.githubusercontent.com/yakimovim/rational-numbers/master/RationalNumbers/math.ico",
+    "tags": [
+      "Math"
+    ]
+  },
+  "supports": {},
+  "dependencies": {
+    "NETStandard.Library": "1.6.1"
+  },
+  "frameworks": {
+    "netstandard1.1": {}
+  }
+}
