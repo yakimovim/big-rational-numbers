@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using Xunit;
 
 namespace EdlinSoftware.BigRationalNumbers.Tests
@@ -22,10 +23,11 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(4, 2, 2, 1)]
-        [InlineData(8, 6, 4, 3)]
-        [InlineData(5, 3, 5, 3)]
-        public void Constructor_ShouldSimplifyValue(long inputNumerator, long inputDenominator, long expectedNumerator, long expectedDenominator)
+        [InlineBigIntegerData(4, 2, 2, 1)]
+        [InlineBigIntegerData(8, 6, 4, 3)]
+        [InlineBigIntegerData(5, 3, 5, 3)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111111", 1)]
+        public void Constructor_ShouldSimplifyValue(BigInteger inputNumerator, BigInteger inputDenominator, BigInteger expectedNumerator, BigInteger expectedDenominator)
         {
             var rationalNumber = new RationalNumber(inputNumerator, inputDenominator);
 
@@ -67,12 +69,14 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(4, 2, 4, 2, true)]
-        [InlineData(4, 2, 2, 1, true)]
-        [InlineData(4, 2, -2, -1, true)]
-        [InlineData(4, 2, -2, 1, false)]
-        [InlineData(5, 3, 7, 2, false)]
-        public void Equal_Values(long numerator1, long denominator1, long numerator2, long denominator2, bool areEqual)
+        [InlineBigIntegerData(4, 2, 4, 2, true)]
+        [InlineBigIntegerData(4, 2, 2, 1, true)]
+        [InlineBigIntegerData(4, 2, -2, -1, true)]
+        [InlineBigIntegerData(4, 2, -2, 1, false)]
+        [InlineBigIntegerData(5, 3, 7, 2, false)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111111", 1, true)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111112", 1, false)]
+        public void Equal_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2, bool areEqual)
         {
             var rationalNumber1 = new RationalNumber(numerator1, denominator1);
             var rationalNumber2 = new RationalNumber(numerator2, denominator2);
@@ -81,12 +85,14 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(4, 2, 4, 2, true)]
-        [InlineData(4, 2, 2, 1, true)]
-        [InlineData(4, 2, -2, -1, true)]
-        [InlineData(4, 2, -2, 1, false)]
-        [InlineData(5, 3, 7, 2, false)]
-        public void EqualityOperator_Values(long numerator1, long denominator1, long numerator2, long denominator2, bool areEqual)
+        [InlineBigIntegerData(4, 2, 4, 2, true)]
+        [InlineBigIntegerData(4, 2, 2, 1, true)]
+        [InlineBigIntegerData(4, 2, -2, -1, true)]
+        [InlineBigIntegerData(4, 2, -2, 1, false)]
+        [InlineBigIntegerData(5, 3, 7, 2, false)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111111", 1, true)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111112", 1, false)]
+        public void EqualityOperator_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2, bool areEqual)
         {
             var rationalNumber1 = new RationalNumber(numerator1, denominator1);
             var rationalNumber2 = new RationalNumber(numerator2, denominator2);
@@ -95,19 +101,21 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(4, 2, 4, 2, false)]
-        [InlineData(-4, 2, -4, 2, false)]
-        [InlineData(4, 2, 2, 1, false)]
-        [InlineData(4, 2, -2, -1, false)]
-        [InlineData(4, 2, -2, 1, false)]
-        [InlineData(4, 2, 6, 1, true)]
-        [InlineData(5, 3, 7, 2, true)]
-        [InlineData(long.MaxValue - 1, long.MaxValue, long.MaxValue - 1, long.MaxValue, false)]
-        [InlineData(long.MaxValue - 2, long.MaxValue, long.MaxValue - 1, long.MaxValue, true)]
-        [InlineData(long.MinValue + 2, long.MaxValue, long.MinValue + 1, long.MaxValue, false)]
-        [InlineData(100000000L, 1, 10000000000L, 101, false)]
-        [InlineData(-100000000L, 1, -10000000000L, 101, true)]
-        public void LessOperator_Values(long numerator1, long denominator1, long numerator2, long denominator2, bool isTrue)
+        [InlineBigIntegerData(4, 2, 4, 2, false)]
+        [InlineBigIntegerData(-4, 2, -4, 2, false)]
+        [InlineBigIntegerData(4, 2, 2, 1, false)]
+        [InlineBigIntegerData(4, 2, -2, -1, false)]
+        [InlineBigIntegerData(4, 2, -2, 1, false)]
+        [InlineBigIntegerData(4, 2, 6, 1, true)]
+        [InlineBigIntegerData(5, 3, 7, 2, true)]
+        [InlineBigIntegerData(long.MaxValue - 1, long.MaxValue, long.MaxValue - 1, long.MaxValue, false)]
+        [InlineBigIntegerData(long.MaxValue - 2, long.MaxValue, long.MaxValue - 1, long.MaxValue, true)]
+        [InlineBigIntegerData(long.MinValue + 2, long.MaxValue, long.MinValue + 1, long.MaxValue, false)]
+        [InlineBigIntegerData(100000000L, 1, 10000000000L, 101, false)]
+        [InlineBigIntegerData(-100000000L, 1, -10000000000L, 101, true)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111111", 1, false)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111112", 1, true)]
+        public void LessOperator_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2, bool isTrue)
         {
             var rationalNumber1 = new RationalNumber(numerator1, denominator1);
             var rationalNumber2 = new RationalNumber(numerator2, denominator2);
@@ -116,20 +124,23 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(4, 2, 4, 2, false)]
-        [InlineData(-4, 2, -4, 2, false)]
-        [InlineData(4, 2, 2, 1, false)]
-        [InlineData(4, 2, -2, -1, false)]
-        [InlineData(4, 2, -2, 1, true)]
-        [InlineData(4, 2, 6, 1, false)]
-        [InlineData(5, 3, 7, 2, false)]
-        [InlineData(7, 2, 5, 3, true)]
-        [InlineData(long.MaxValue - 1, long.MaxValue, long.MaxValue - 1, long.MaxValue, false)]
-        [InlineData(long.MaxValue - 2, long.MaxValue, long.MaxValue - 1, long.MaxValue, false)]
-        [InlineData(long.MinValue + 2, long.MaxValue, long.MinValue + 1, long.MaxValue, true)]
-        [InlineData(100000000L, 1, 10000000000L, 101, true)]
-        [InlineData(-100000000L, 1, -10000000000L, 101, false)]
-        public void GreaterOperator_Values(long numerator1, long denominator1, long numerator2, long denominator2, bool isTrue)
+        [InlineBigIntegerData(4, 2, 4, 2, false)]
+        [InlineBigIntegerData(-4, 2, -4, 2, false)]
+        [InlineBigIntegerData(4, 2, 2, 1, false)]
+        [InlineBigIntegerData(4, 2, -2, -1, false)]
+        [InlineBigIntegerData(4, 2, -2, 1, true)]
+        [InlineBigIntegerData(4, 2, 6, 1, false)]
+        [InlineBigIntegerData(5, 3, 7, 2, false)]
+        [InlineBigIntegerData(7, 2, 5, 3, true)]
+        [InlineBigIntegerData(long.MaxValue - 1, long.MaxValue, long.MaxValue - 1, long.MaxValue, false)]
+        [InlineBigIntegerData(long.MaxValue - 2, long.MaxValue, long.MaxValue - 1, long.MaxValue, false)]
+        [InlineBigIntegerData(long.MinValue + 2, long.MaxValue, long.MinValue + 1, long.MaxValue, true)]
+        [InlineBigIntegerData(100000000L, 1, 10000000000L, 101, true)]
+        [InlineBigIntegerData(-100000000L, 1, -10000000000L, 101, false)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111111", 1, false)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111112", 1, false)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111110", 1, true)]
+        public void GreaterOperator_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2, bool isTrue)
         {
             var rationalNumber1 = new RationalNumber(numerator1, denominator1);
             var rationalNumber2 = new RationalNumber(numerator2, denominator2);
@@ -138,11 +149,12 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(1, 2, 4, 2)]
-        [InlineData(-2, 1, 4, 2)]
-        [InlineData(long.MaxValue - 2, long.MaxValue, long.MaxValue - 1, long.MaxValue)]
-        [InlineData(long.MinValue + 1, long.MaxValue, long.MinValue + 2, long.MaxValue)]
-        public void CompareTo_FirstIsLess_Values(long numerator1, long denominator1, long numerator2, long denominator2)
+        [InlineBigIntegerData(1, 2, 4, 2)]
+        [InlineBigIntegerData(-2, 1, 4, 2)]
+        [InlineBigIntegerData(long.MaxValue - 2, long.MaxValue, long.MaxValue - 1, long.MaxValue)]
+        [InlineBigIntegerData(long.MinValue + 1, long.MaxValue, long.MinValue + 2, long.MaxValue)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111112", 1)]
+        public void CompareTo_FirstIsLess_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2)
         {
             var rationalNumber1 = new RationalNumber(numerator1, denominator1);
             var rationalNumber2 = new RationalNumber(numerator2, denominator2);
@@ -151,11 +163,12 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(4, 2, 1, 2)]
-        [InlineData(2, 1, -2, 1)]
-        [InlineData(long.MaxValue - 1, long.MaxValue, long.MaxValue - 2, long.MaxValue)]
-        [InlineData(long.MinValue + 2, long.MaxValue, long.MinValue + 1, long.MaxValue)]
-        public void CompareTo_SecondIsLess_Values(long numerator1, long denominator1, long numerator2, long denominator2)
+        [InlineBigIntegerData(4, 2, 1, 2)]
+        [InlineBigIntegerData(2, 1, -2, 1)]
+        [InlineBigIntegerData(long.MaxValue - 1, long.MaxValue, long.MaxValue - 2, long.MaxValue)]
+        [InlineBigIntegerData(long.MinValue + 2, long.MaxValue, long.MinValue + 1, long.MaxValue)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111110", 1)]
+        public void CompareTo_SecondIsLess_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2)
         {
             var rationalNumber1 = new RationalNumber(numerator1, denominator1);
             var rationalNumber2 = new RationalNumber(numerator2, denominator2);
@@ -164,11 +177,12 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(4, 2, 2, 1)]
-        [InlineData(-2, 1, -2, 1)]
-        [InlineData(long.MaxValue - 1, long.MaxValue, long.MaxValue - 1, long.MaxValue)]
-        [InlineData(long.MinValue + 1, long.MaxValue, long.MinValue + 1, long.MaxValue)]
-        public void CompareTo_BothEqual_Values(long numerator1, long denominator1, long numerator2, long denominator2)
+        [InlineBigIntegerData(4, 2, 2, 1)]
+        [InlineBigIntegerData(-2, 1, -2, 1)]
+        [InlineBigIntegerData(long.MaxValue - 1, long.MaxValue, long.MaxValue - 1, long.MaxValue)]
+        [InlineBigIntegerData(long.MinValue + 1, long.MaxValue, long.MinValue + 1, long.MaxValue)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111111", 1)]
+        public void CompareTo_BothEqual_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2)
         {
             var rationalNumber1 = new RationalNumber(numerator1, denominator1);
             var rationalNumber2 = new RationalNumber(numerator2, denominator2);
@@ -177,45 +191,49 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(2, 1, 2, 1, 4, 1)]
-        [InlineData(2, 1, -2, 1, 0, 1)]
-        [InlineData(2, 3, 3, 4, 17, 12)]
-        [InlineData(5, 6, 7, 8, 41, 24)]
-        public void AddOperator_Values(long numerator1, long denominator1, long numerator2, long denominator2,
-            long resultNumerator, long resultDenominator)
+        [InlineBigIntegerData(2, 1, 2, 1, 4, 1)]
+        [InlineBigIntegerData(2, 1, -2, 1, 0, 1)]
+        [InlineBigIntegerData(2, 3, 3, 4, 17, 12)]
+        [InlineBigIntegerData(5, 6, 7, 8, 41, 24)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111111", 1, "222222222222222222222222", 1)]
+        public void AddOperator_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2,
+            BigInteger resultNumerator, BigInteger resultDenominator)
         {
             Assert.Equal(new RationalNumber(resultNumerator, resultDenominator), new RationalNumber(numerator1, denominator1) + new RationalNumber(numerator2, denominator2));
         }
 
         [Theory]
-        [InlineData(2, 1, 2, 1, 0, 1)]
-        [InlineData(2, 1, -2, 1, 4, 1)]
-        [InlineData(2, 3, 3, 4, -1, 12)]
-        [InlineData(5, 6, 7, 8, -1, 24)]
-        public void SubOperator_Values(long numerator1, long denominator1, long numerator2, long denominator2,
-            long resultNumerator, long resultDenominator)
+        [InlineBigIntegerData(2, 1, 2, 1, 0, 1)]
+        [InlineBigIntegerData(2, 1, -2, 1, 4, 1)]
+        [InlineBigIntegerData(2, 3, 3, 4, -1, 12)]
+        [InlineBigIntegerData(5, 6, 7, 8, -1, 24)]
+        [InlineBigIntegerData("333333333333333333333333", 3, "111111111111111111111111", 1, 0, 1)]
+        public void SubOperator_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2,
+            BigInteger resultNumerator, BigInteger resultDenominator)
         {
             Assert.Equal(new RationalNumber(resultNumerator, resultDenominator), new RationalNumber(numerator1, denominator1) - new RationalNumber(numerator2, denominator2));
         }
 
         [Theory]
-        [InlineData(2, 1, 2, 1, 4, 1)]
-        [InlineData(2, 1, -2, 1, -4, 1)]
-        [InlineData(2, 3, 3, 4, 1, 2)]
-        [InlineData(5, 6, 7, 8, 35, 48)]
-        public void MulOperator_Values(long numerator1, long denominator1, long numerator2, long denominator2,
-            long resultNumerator, long resultDenominator)
+        [InlineBigIntegerData(2, 1, 2, 1, 4, 1)]
+        [InlineBigIntegerData(2, 1, -2, 1, -4, 1)]
+        [InlineBigIntegerData(2, 3, 3, 4, 1, 2)]
+        [InlineBigIntegerData(5, 6, 7, 8, 35, 48)]
+        [InlineBigIntegerData("1000000000000000", 1, "1000000000000000", 1, "1000000000000000000000000000000", 1)]
+        public void MulOperator_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2,
+            BigInteger resultNumerator, BigInteger resultDenominator)
         {
             Assert.Equal(new RationalNumber(resultNumerator, resultDenominator), new RationalNumber(numerator1, denominator1) * new RationalNumber(numerator2, denominator2));
         }
 
         [Theory]
-        [InlineData(2, 1, 2, 1, 1, 1)]
-        [InlineData(2, 1, -2, 1, -1, 1)]
-        [InlineData(2, 3, 3, 4, 8, 9)]
-        [InlineData(5, 6, 7, 8, 20, 21)]
-        public void DivOperator_Values(long numerator1, long denominator1, long numerator2, long denominator2,
-            long resultNumerator, long resultDenominator)
+        [InlineBigIntegerData(2, 1, 2, 1, 1, 1)]
+        [InlineBigIntegerData(2, 1, -2, 1, -1, 1)]
+        [InlineBigIntegerData(2, 3, 3, 4, 8, 9)]
+        [InlineBigIntegerData(5, 6, 7, 8, 20, 21)]
+        [InlineBigIntegerData("1000000000000000000000000000000", 1, "2000000000000000", 2, "1000000000000000", 1)]
+        public void DivOperator_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2, BigInteger denominator2,
+            BigInteger resultNumerator, BigInteger resultDenominator)
         {
             Assert.Equal(new RationalNumber(resultNumerator, resultDenominator), new RationalNumber(numerator1, denominator1) / new RationalNumber(numerator2, denominator2));
         }
@@ -227,11 +245,13 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         }
 
         [Theory]
-        [InlineData(2, 1, true)]
-        [InlineData(-2, 1, false)]
-        [InlineData(long.MaxValue, 1, true)]
-        [InlineData(long.MinValue + 1, 1, false)]
-        public void Abs_Values(long numerator1, long denominator1, bool isSame)
+        [InlineBigIntegerData(2, 1, true)]
+        [InlineBigIntegerData(-2, 1, false)]
+        [InlineBigIntegerData(long.MaxValue, 1, true)]
+        [InlineBigIntegerData(long.MinValue + 1, 1, false)]
+        [InlineBigIntegerData("333333333333333333333333", 3, true)]
+        [InlineBigIntegerData("-333333333333333333333333", 3, false)]
+        public void Abs_Values(BigInteger numerator1, BigInteger denominator1, bool isSame)
         {
             if (isSame)
             {

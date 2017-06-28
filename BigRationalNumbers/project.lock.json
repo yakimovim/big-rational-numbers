@@ -2477,7 +2477,7 @@
     ".NETStandard,Version=v1.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Yakimov\\.nuget\\packages\\": {}
+    "C:\\Users\\IvanY\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -2498,10 +2498,10 @@
       "licenseUrl": "https://raw.githubusercontent.com/yakimovim/big-rational-numbers/master/LICENSE"
     },
     "restore": {
-      "projectUniqueName": "E:\\Каталог Вани\\Код\\Git Repositories\\BigRationalNumbers\\BigRationalNumbers\\BigRationalNumbers.csproj",
+      "projectUniqueName": "C:\\Users\\IvanY\\Code\\Git Repositories\\BigRationalNumbers\\BigRationalNumbers\\BigRationalNumbers.csproj",
       "projectName": "BigRationalNumbers",
-      "projectPath": "E:\\Каталог Вани\\Код\\Git Repositories\\BigRationalNumbers\\BigRationalNumbers\\BigRationalNumbers.csproj",
-      "projectJsonPath": "E:\\Каталог Вани\\Код\\Git Repositories\\BigRationalNumbers\\BigRationalNumbers\\project.json",
+      "projectPath": "C:\\Users\\IvanY\\Code\\Git Repositories\\BigRationalNumbers\\BigRationalNumbers\\BigRationalNumbers.csproj",
+      "projectJsonPath": "C:\\Users\\IvanY\\Code\\Git Repositories\\BigRationalNumbers\\BigRationalNumbers\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {
