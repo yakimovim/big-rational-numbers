@@ -17,6 +17,10 @@ namespace EdlinSoftware.BigRationalNumbers
         /// One value.
         /// </summary>
         public static readonly RationalNumber One = new RationalNumber(1, 1);
+        /// <summary>
+        /// Minus one value.
+        /// </summary>
+        public static readonly RationalNumber MinusOne = new RationalNumber(-1, 1);
 
         /// <summary>
         /// Numerator of value.
@@ -304,6 +308,87 @@ namespace EdlinSoftware.BigRationalNumbers
                 return this;
 
             return -this;
+        }
+
+        /// <summary>
+        /// Returns absolute value of given number.
+        /// </summary>
+        /// <param name="rationalNumber">Rational number.</param>
+        public static RationalNumber Abs(RationalNumber rationalNumber)
+        {
+            return rationalNumber.Abs();
+        }
+
+        /// <summary>
+        /// Raises the rational number into integer power.
+        /// </summary>
+        /// <param name="exponent">Power.</param>
+        public RationalNumber Pow(int exponent)
+        {
+            if (Numerator == BigInteger.Zero)
+            {
+                if (exponent < 0)
+                {
+                    throw new DivideByZeroException("Unable to raise zero value to negative power.");
+                }
+                if (exponent == 0)
+                {
+                    return One;
+                }
+
+                return Zero;
+            }
+
+            if (exponent == 0)
+                return One;
+
+            if (exponent > 0)
+            {
+                var numerator = BigInteger.Pow(Numerator, exponent);
+                var denominator = BigInteger.Pow(Denominator, exponent);
+                return new RationalNumber(numerator, denominator);
+            }
+            else
+            {
+                exponent = -exponent;
+                var numerator = BigInteger.Pow(Denominator, exponent);
+                var denominator = BigInteger.Pow(Numerator, exponent);
+                return new RationalNumber(numerator, denominator);
+            }
+        }
+
+        /// <summary>
+        /// Raises the rational number into integer power.
+        /// </summary>
+        /// <param name="rationalNumber">Rational number.</param>
+        /// <param name="exponent">Power.</param>
+        public static RationalNumber Pow(RationalNumber rationalNumber, int exponent)
+        {
+            return rationalNumber.Pow(exponent);
+        }
+
+        /// <summary>
+        /// Returns minimum of two numbers.
+        /// </summary>
+        /// <param name="rationalNumber1">First rational number.</param>
+        /// <param name="rationalNumber2">Second rational number.</param>
+        public static RationalNumber Min(RationalNumber rationalNumber1, RationalNumber rationalNumber2)
+        {
+            return rationalNumber1 <= rationalNumber2
+                ? rationalNumber1
+                : rationalNumber2;
+        }
+
+        /// <summary>
+        /// Returns maximum of two numbers.
+        /// </summary>
+        /// <param name="rationalNumber1">First rational number.</param>
+        /// <param name="rationalNumber2">Second rational number.</param>
+        public static RationalNumber Max(RationalNumber rationalNumber1, RationalNumber rationalNumber2)
+        {
+            return rationalNumber1 >= rationalNumber2
+                ? rationalNumber1
+                : rationalNumber2;
         }
     }
 }

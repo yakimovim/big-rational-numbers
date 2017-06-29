@@ -253,15 +253,92 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         [InlineBigIntegerData("-333333333333333333333333", 3, false)]
         public void Abs_Values(BigInteger numerator1, BigInteger denominator1, bool isSame)
         {
+            var rationalNumber = new RationalNumber(numerator1, denominator1);
             if (isSame)
             {
-                Assert.Equal(new RationalNumber(numerator1, denominator1), new RationalNumber(numerator1, denominator1).Abs());
+                Assert.Equal(rationalNumber, rationalNumber.Abs());
+                Assert.Equal(rationalNumber, RationalNumber.Abs(rationalNumber));
             }
             else
             {
-                Assert.Equal(new RationalNumber(-numerator1, denominator1), new RationalNumber(numerator1, denominator1).Abs());
-
+                Assert.Equal(-rationalNumber, rationalNumber.Abs());
+                Assert.Equal(-rationalNumber, RationalNumber.Abs(rationalNumber));
             }
+        }
+
+        [Theory]
+        [InlineBigIntegerData(2, 1, 3, 1, true)]
+        [InlineBigIntegerData(2, 1, 2, 1, true)]
+        [InlineBigIntegerData(2, 1, 2, 1, false)]
+        [InlineBigIntegerData(3, 1, 2, 1, false)]
+        [InlineBigIntegerData(-10, 1, 2, 1, true)]
+        [InlineBigIntegerData(1, 1, -20, 1, false)]
+        public void Min_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2,
+            BigInteger denominator2, bool minIsFirst)
+        {
+            var rationalNumber1 = new RationalNumber(numerator1, denominator1);
+            var rationalNumber2 = new RationalNumber(numerator2, denominator2);
+            if (minIsFirst)
+            {
+                Assert.Equal(rationalNumber1, RationalNumber.Min(rationalNumber1, rationalNumber2));
+            }
+            else
+            {
+                Assert.Equal(rationalNumber2, RationalNumber.Min(rationalNumber1, rationalNumber2));
+            }
+        }
+
+        [Theory]
+        [InlineBigIntegerData(2, 1, 3, 1, false)]
+        [InlineBigIntegerData(2, 1, 2, 1, false)]
+        [InlineBigIntegerData(2, 1, 2, 1, true)]
+        [InlineBigIntegerData(3, 1, 2, 1, true)]
+        [InlineBigIntegerData(-10, 1, 2, 1, false)]
+        [InlineBigIntegerData(1, 1, -20, 1, true)]
+        public void Max_Values(BigInteger numerator1, BigInteger denominator1, BigInteger numerator2,
+            BigInteger denominator2, bool maxIsFirst)
+        {
+            var rationalNumber1 = new RationalNumber(numerator1, denominator1);
+            var rationalNumber2 = new RationalNumber(numerator2, denominator2);
+            if (maxIsFirst)
+            {
+                Assert.Equal(rationalNumber1, RationalNumber.Max(rationalNumber1, rationalNumber2));
+            }
+            else
+            {
+                Assert.Equal(rationalNumber2, RationalNumber.Max(rationalNumber1, rationalNumber2));
+            }
+        }
+
+        [Theory]
+        [InlineBigIntegerData(0, 1, 0, 1, 1)]
+        [InlineBigIntegerData(0, 1, 1, 0, 1)]
+        [InlineBigIntegerData(3, 1, 1, 3, 1)]
+        [InlineBigIntegerData(-3, 1, 1, -3, 1)]
+        [InlineBigIntegerData(-3, 1, 0, 1, 1)]
+        [InlineBigIntegerData(3, 1, 0, 1, 1)]
+        [InlineBigIntegerData(2, 1, 2, 4, 1)]
+        [InlineBigIntegerData(3, 7, 2, 9, 49)]
+        [InlineBigIntegerData(2, 1, -2, 1, 4)]
+        [InlineBigIntegerData(-2, 1, -2, 1, 4)]
+        [InlineBigIntegerData(-2, 1, -3, -1, 8)]
+        [InlineBigIntegerData("1000000000000", 1, -2, 1, "1000000000000000000000000")]
+        public void Pow_Values(BigInteger numerator1, BigInteger denominator1, BigInteger exponent, BigInteger numerator2,
+            BigInteger denominator2)
+        {
+            var rationalNumber1 = new RationalNumber(numerator1, denominator1);
+            var rationalNumber2 = new RationalNumber(numerator2, denominator2);
+
+            var power = (int) exponent;
+
+            Assert.Equal(rationalNumber2, rationalNumber1.Pow(power));
+            Assert.Equal(rationalNumber2, RationalNumber.Pow(rationalNumber1, power));
+        }
+
+        [Fact]
+        public void Pow_ShouldThrowDivideByZeroException_IfValueIsZeroAndPowerIsNegative()
+        {
+            Assert.Throws<DivideByZeroException>(() => RationalNumber.Zero.Pow(-1));
         }
     }
 }

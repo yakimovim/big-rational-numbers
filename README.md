@@ -15,6 +15,8 @@ This library implements structure for presentation of rational numbers in .NET. 
 * ==
 * \!=
 * absolute value
+* minimum and maximum of two values
+* power
 * implicit convertion from integer values (byte, int, long, ...)
 * explicit convertion to double, decimal and float
 
