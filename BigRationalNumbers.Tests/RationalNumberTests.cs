@@ -340,5 +340,44 @@ namespace EdlinSoftware.BigRationalNumbers.Tests
         {
             Assert.Throws<DivideByZeroException>(() => RationalNumber.Zero.Pow(-1));
         }
+
+        [Theory]
+        [InlineBigIntegerData(2, 1, 0.693)]
+        [InlineBigIntegerData(4, 3, 0.288)]
+        [InlineBigIntegerData(0, 1, double.NegativeInfinity)]
+        [InlineBigIntegerData(-1, 1, double.NaN)]
+        public void Log_Values(BigInteger numerator1, BigInteger denominator1, double log)
+        {
+            var rationalNumber = new RationalNumber(numerator1, denominator1);
+
+            Assert.Equal(log, rationalNumber.Log(), 3);
+            Assert.Equal(log, RationalNumber.Log(rationalNumber), 3);
+        }
+
+        [Theory]
+        [InlineBigIntegerData(2, 1, 0.301)]
+        [InlineBigIntegerData(4, 3, 0.125)]
+        [InlineBigIntegerData(0, 1, double.NegativeInfinity)]
+        [InlineBigIntegerData(-1, 1, double.NaN)]
+        public void Log10_Values(BigInteger numerator1, BigInteger denominator1, double log)
+        {
+            var rationalNumber = new RationalNumber(numerator1, denominator1);
+
+            Assert.Equal(log, rationalNumber.Log10(), 3);
+            Assert.Equal(log, RationalNumber.Log10(rationalNumber), 3);
+        }
+
+        [Theory]
+        [InlineBigIntegerData(2, 1, 0.631)]
+        [InlineBigIntegerData(4, 3, 0.262)]
+        [InlineBigIntegerData(0, 1, double.NegativeInfinity)]
+        [InlineBigIntegerData(-1, 1, double.NaN)]
+        public void LogWithBase3_Values(BigInteger numerator1, BigInteger denominator1, double log)
+        {
+            var rationalNumber = new RationalNumber(numerator1, denominator1);
+
+            Assert.Equal(log, rationalNumber.Log((double)3), 3);
+            Assert.Equal(log, RationalNumber.Log(rationalNumber, 3), 3);
+        }
     }
 }

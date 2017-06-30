@@ -368,6 +368,89 @@ namespace EdlinSoftware.BigRationalNumbers
         }
 
         /// <summary>
+        /// Computes natural logarithm of the rational number.
+        /// </summary>
+        /// <returns>
+        /// double.NegativeInfinity, if number is zero.
+        /// double.NaN, if number is negative.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public double Log()
+        {
+            return BigInteger.Log(Numerator) - BigInteger.Log(Denominator);
+        }
+
+        /// <summary>
+        /// Computes natural logarithm of the rational number.
+        /// </summary>
+        /// <param name="rationalNumber">Rational number.</param>
+        /// <returns>
+        /// double.NegativeInfinity, if number is zero.
+        /// double.NaN, if number is negative.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static double Log(RationalNumber rationalNumber)
+        {
+            return rationalNumber.Log();
+        }
+
+        /// <summary>
+        /// Computes logarithm with given base of the rational number.
+        /// </summary>
+        /// <param name="baseValue">Base of the logarithm.</param>
+        /// <returns>
+        /// double.NegativeInfinity, if number is zero.
+        /// double.NaN, if number is negative.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public double Log(double baseValue)
+        {
+            return BigInteger.Log(Numerator, baseValue) - BigInteger.Log(Denominator, baseValue);
+        }
+
+        /// <summary>
+        /// Computes logarithm with given base of the rational number.
+        /// </summary>
+        /// <param name="rationalNumber">Rational number.</param>
+        /// <param name="baseValue">Base of the logarithm.</param>
+        /// <returns>
+        /// double.NegativeInfinity, if number is zero.
+        /// double.NaN, if number is negative.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static double Log(RationalNumber rationalNumber, double baseValue)
+        {
+            return rationalNumber.Log(baseValue);
+        }
+
+        /// <summary>
+        /// Computes base 10 logarithm of the rational number.
+        /// </summary>
+        /// <returns>
+        /// double.NegativeInfinity, if number is zero.
+        /// double.NaN, if number is negative.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public double Log10()
+        {
+            return BigInteger.Log10(Numerator) - BigInteger.Log10(Denominator);
+        }
+
+        /// <summary>
+        /// Computes base 10 logarithm of the rational number.
+        /// </summary>
+        /// <param name="rationalNumber">Rational number.</param>
+        /// <returns>
+        /// double.NegativeInfinity, if number is zero.
+        /// double.NaN, if number is negative.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static double Log10(RationalNumber rationalNumber)
+        {
+            return rationalNumber.Log10();
+        }
+
+        /// <summary>
         /// Returns minimum of two numbers.
         /// </summary>
         /// <param name="rationalNumber1">First rational number.</param>
