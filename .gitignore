@@ -151,3 +151,4 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 .vs/
+project.lock.json
